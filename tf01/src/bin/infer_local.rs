@@ -35,7 +35,7 @@ fn main() {
     sm.session.run(&mut step).unwrap();
 
     //  取出结果
-    let output = step.fetch(output_t).unwrap();
+    let output: Tensor<f32> = step.fetch(output_t).unwrap();
 
     println!("{:?}", output);
 }
