@@ -1,5 +1,3 @@
-
-
 // 定义一个队列
 #[derive(Debug)]
 pub struct Queue<T> {
@@ -54,4 +52,26 @@ pub fn test_queue(){
 
     println!("size : {} , empty : {}", q1.size(), q1.is_empty());
     println!("content : {:?}", q1);
+}
+
+pub fn hot_potato(names: Vec<&str>, num: usize) -> &str {
+    let mut queue = Queue::new(names.len());
+    for name in names {
+        let _rm = queue.enqueue(name);
+    }
+
+    while queue.size() > 1 {
+        for _ in 0..num {
+            let name = queue.dequeue().unwrap();
+            let _rm = queue.enqueue(name);
+        }
+        let _rm = queue.dequeue();
+    }
+
+    queue.dequeue().unwrap()
+}
+
+pub fn test_hot_potato(){
+    let names = vec!["a", "b", "c", "d", "e", "f"];
+    println!("{}", hot_potato(names, 7));
 }
